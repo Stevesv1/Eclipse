@@ -5,18 +5,23 @@ check_command() {
     command -v "$1" >/dev/null 2>&1
 }
 
-# Function to install NVM, Node.js, and npm
-install_nvm_node() {
+# Function to install NVM
+install_nvm() {
+    # Change to the home directory to avoid path issues
+    cd ~ || exit
+
     # Install NVM
     echo "Installing NVM..."
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 
-    # Load NVM
+    # Load NVM into the current shell
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+}
 
-    # Install the latest Node.js
+# Function to install Node.js and npm
+install_node() {
     echo "Installing Node.js..."
     nvm install node
 }
@@ -39,29 +44,33 @@ else
     echo "Running as non-root user."
 fi
 
-# Check if NVM, Node.js, and npm are installed
+# Check if NVM is installed
 if ! check_command "nvm"; then
     echo "NVM is not installed."
-    install_nvm_node
+    install_nvm
 else
-    echo "NVM is installed."
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+    echo "NVM is already installed."
 fi
 
+# Load NVM for the current session
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# Check if Node.js is installed
 if ! check_command "node"; then
     echo "Node.js is not installed."
-    install_nvm_node
+    install_node
 else
-    echo "Node.js is installed."
+    echo "Node.js is already installed."
 fi
 
+# Check if npm is installed
 if ! check_command "npm"; then
     echo "npm is not installed."
-    install_nvm_node
+    install_node
 else
-    echo "npm is installed."
+    echo "npm is already installed."
 fi
 
 # Check if paths are exported for the current shell
@@ -75,4 +84,4 @@ if ! grep -q "NVM_DIR" ~/.bashrc; then
     update_profile
 fi
 
-echo "Script execution completed. Please restart your terminal for changes to take effect."
+echo "Script execution completed"
