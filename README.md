@@ -6,7 +6,7 @@
 
 ![Img-1](https://github.com/user-attachments/assets/30f7abde-4ab0-4d7b-9b53-4101a7028e7e)
 
-- You will see 10 different quests, here I will show how to do only dev tasks (`Quest 4`,`Quest 6`,`Quest 7`)
+- You will see 10 different quests, here I will show how to do only dev tasks (`Quest 4`,`Quest 6`)
 
 ---
 
@@ -37,21 +37,51 @@
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.26;
 
-contract FollowPrompt {
-    string private greetingMessage;
+contract SimpleStorage {
+    uint256 public storedData;
 
-    constructor() {
-        greetingMessage = "Follow @ZunXBT on X!";
+    function set(uint256 x) public {
+        storedData = x;
     }
 
-    function setGreeting(string memory newGreeting) public {
-        greetingMessage = newGreeting;
-    }
-
-    function greet() public view returns (string memory) {
-        return greetingMessage;
+    function get() public view returns (uint256) {
+        return storedData;
     }
 }
 ```
+- Click on `Solidity Compiler` icon
+
+![Img-4](https://github.com/user-attachments/assets/1e25afbb-183a-4630-bab4-887cfd6a940d)
+
+- Then click on `Compile YOUR_CONTRACT_NAME.sol`
+
+![Img-5](https://github.com/user-attachments/assets/aa054f1a-94e4-4fec-b7e9-989002752728)
+
+- Afterthat, click on `Deploy and run transactions` icon in the left slide bar
+
+![Img-5](https://github.com/user-attachments/assets/8e5a154a-e415-4805-b1d3-5e157b990b04)
+
+- Open your wallet and then switch to `Fhenix Helium` network if you have not switched it yet
+- Now choose `Injected Provider` in environment section and then choose your wallet
+- Then click on `Deploy` button to deloy a contract
+
+![Img-6](https://github.com/user-attachments/assets/39a4b675-0a83-4f1c-9948-3d56f5f41ec4)
+
+- Congrats, you have successfully deployed a contract on `Fhenix Helium`
+- You can check your deployed contract address here
+
+![Img7](https://github.com/user-attachments/assets/74fdd356-6104-4c6e-8574-bfa32227b41b)
+
+
+- Right now, you can deploy max 5 contract and can earn 150 points
+- To deploy more contracts,click on `Deploy` button again and again
+- Do this process 4 times to deploy 4 contracts
+
+## Quest 6 : Contract Verification
+- If you use above contract code, It will be verified automatically, You don't need to do anything
+
+![image](https://github.com/user-attachments/assets/6131b98d-c88e-4308-ae52-acbfddb0ef3f)
+
+- Also, there contract verification tool is defective, if you use other than the above code, your contract will not be verified now
